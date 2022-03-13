@@ -1,29 +1,23 @@
 <script>
     import Modal from "./Modal2.svelte";
     import Stage from "./Stage.svelte";
+    import Background from "./Background.svelte"
 
     import { gameSettings } from "./stores";
 </script>
 
 <Modal>
-    <div class="bg">
-        <div class="strips">
-            <div class="leftStrip" />
-            <div class="rightStrip" />
-        </div>
-        <div class="bgs">
-            <div class="bgs-relative">
-                <div class="teams">
-                    <div class="leftBg">
-                        <div class="namePlateLeft">
-                            {$gameSettings.players[0].name}
-                        </div>
-                    </div>
-                    <div class="rightBg">
-                        <div class="namePlateRight">
-                            {$gameSettings.players[1].name}
-                        </div>
-                    </div>
+    <Background />
+    <div class="bgs">
+        <div class="bgs-relative">
+            <div class="leftBg">
+                <div class="namePlateLeft">
+                    {$gameSettings.players[0].name}
+                </div>
+            </div>
+            <div class="rightBg">
+                <div class="namePlateRight">
+                    {$gameSettings.players[1].name}
                 </div>
             </div>
         </div>
@@ -38,31 +32,6 @@
         overflow: hidden;
     }
 
-    .strips {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
-
-    .leftStrip {
-        height: 60vh;
-        width: 43%;
-        background: linear-gradient(#ce4a5d, #ff4a60);
-        transform: skew(-20deg, 5deg);
-        border: 20px solid #ffc5cc;
-        border-radius: 10px;
-    }
-
-    .rightStrip {
-        height: 60vh;
-        width: 43%;
-        background: linear-gradient(#6378ff, #7d8fff);
-        transform: skew(20deg, -5deg);
-        border: 20px solid #c6ceff;
-        border-radius: 10px;
-        margin-left: 230px;
-    }
-
     .bgs {
         position: absolute;
         bottom: 120px;
@@ -73,16 +42,16 @@
         justify-content: space-between;
     }
 
-    .teams {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
+    .bgs-relative {
+        position: relative;
+        width: 90%;
+        margin: 0 auto;
+        height: 35vh;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
+
     .leftBg {
         position: relative;
         height: 30vh;
@@ -104,12 +73,7 @@
         transform: skew(0deg, -2deg)
     }
 
-    .bgs-relative {
-        position: relative;
-        width: 90%;
-        margin: 0 auto;
-        height: 35vh;
-    }
+   
 
     .namePlateLeft {
         position: absolute;

@@ -2,22 +2,36 @@
     export let boundKey;
     
     let checked = false;
-    
-    function handleClick(event) {
-        const registerKey = function () {
-            const a = function (event) {
-                boundKey = event.code;
-                document.removeEventListener("keypress", a);
-                checked = false;
-            }
-            return a;
-        }
+    let button;
 
-        if (!checked) {
-            checked = true;
-            document.addEventListener("keypress", registerKey());
+    function handleClick(event) {
+        if (checked) {
+            return;
         }
+        
+        const registerKey = function (event) {
+            boundKey = event.code;
+            document.removeEventListener("keypress", registerKey);
+            
+            checked = false;
+            button.disabled = false;
+        }
+        
+        checked = true;
+        button.disabled = true;
+        document.addEventListener("keypress", registerKey);
     }
 </script>
 
-<input type=checkbox bind:checked={checked} on:click={handleClick}>
+<button bind:this={button} on:click={handleClick} class:checked>{boundKey}</button>
+
+<style>
+    button {
+        border: 3px solid #d5d6d5;
+        width: 160px;
+    }
+    
+    .checked {
+        border: 3px solid rgb(244, 155, 13);
+    }
+</style>
